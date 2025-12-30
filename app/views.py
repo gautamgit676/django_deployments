@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from django.http import HttpResponse
 from .models import SCHOOL
 from .serializer import SchoolSerializer
-
+import logging
 
 def home(request):
     return render(request, 'home.html')
@@ -31,5 +31,8 @@ def school_form(request):
 class SchoolDataAPI(APIView):
     def get(self, request):
         schools = SCHOOL.objects.all()
+        logging.warning(schools)
+        logging.warning('--=--')    
+        print(schools,'--=--')
         serializer = SchoolSerializer(schools, many=True)
         return Response(serializer.data)
