@@ -23,14 +23,25 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-*@0a@10jn)aeqtj1@)@kx0t68sx^1qjrx0#1^h%n4^6sz-pd^_"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ["djangod-production.up.railway.app"]
+DEBUG = True
+ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ["djangod-production.up.railway.app",'localhost:8000']
 CSRF_TRUSTED_ORIGINS = ['https://djangod-production.up.railway.app/']
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 # Application definition
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://djangofrontend-production.up.railway.app",
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "https://djangofrontend-production.up.railway.app",
+]
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True
+
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -39,10 +50,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "corsheaders",
+    "rest_framework",
     'app'
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",  # add this
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -103,6 +117,17 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# CORS_ALLOWED_ORIGINS = [
+#     "http://127.0.0.1:7000",
+#     "http://localhost:7000",
+# ]
+
+# CSRF_TRUSTED_ORIGINS = [
+#     "http://127.0.0.1:7000",
+#     "http://localhost:7000",
+# # ]
+# CORS_ALLOW_CREDENTIALS = True
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
@@ -114,6 +139,11 @@ USE_I18N = True
 
 USE_TZ = True
 
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+    ],
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
