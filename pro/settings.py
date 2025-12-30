@@ -33,11 +33,11 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 # Application definition
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://djangofrontend-production.up.railway.app",
+    "https://web-production-c010a.up.railway.app",
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "https://djangofrontend-production.up.railway.app",
+    "https://web-production-c010a.up.railway.app",
 ]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = True
